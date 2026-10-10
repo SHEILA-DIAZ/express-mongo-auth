@@ -15,6 +15,7 @@ Las credenciales de `.env` están excluidas del repositorio.
 
 | Método | Ruta | Acción |
 | --- | --- | --- |
+| GET | `/health` | Comprobar que el API está activo |
 | GET | `/api/users` | Listar usuarios |
 | GET | `/api/users/:id` | Consultar un usuario |
 | POST | `/api/users` | Crear un usuario |

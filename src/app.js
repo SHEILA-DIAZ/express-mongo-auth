@@ -5,6 +5,9 @@ import userRoutes from './routes/users.routes.js';
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', service: 'express-auth-diaz' });
+});
 app.use('/api/users', userRoutes);
 
 app.use((err, req, res, next) => {
