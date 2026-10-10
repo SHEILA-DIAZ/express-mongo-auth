@@ -1,15 +1,39 @@
 import express from 'express';
-import { userController } from '../controllers/userController.js';
+
+import UserController from '../controllers/userController.js';
+
+import authenticate from '../middlewares/authenticate.js';
+
+import authorize from '../middlewares/authorize.js';
 
 const router = express.Router();
-const handle = (handler) => (req, res, next) => {
-  Promise.resolve(handler(req, res, next)).catch(next);
-};
 
-router.get('/', handle(userController.getAll));
-router.get('/:id', handle(userController.getById));
-router.post('/', handle(userController.create));
-router.put('/:id', handle(userController.update));
-router.delete('/:id', handle(userController.remove));
+router.get(
+    '/',
+    authenticate,
+    authorize(['admin']),
+    UserController.getAll
+);
+
+router.get(
+    '/me',
+    authenticate,
+    authorize([]),
+    UserController.getMe
+);
+
+router.put(
+    '/me',
+    authenticate,
+    authorize([]),
+    UserController.updateMe
+);
+
+router.get(
+    '/:id',
+    authenticate,
+    authorize(['admin']),
+    UserController.getById
+);
 
 export default router;
