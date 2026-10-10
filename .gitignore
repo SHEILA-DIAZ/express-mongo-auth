@@ -1,0 +1,6 @@
+node_modules/
+.lab07-reference/
+.env
+.env.*
+!.env.example
+*.log
